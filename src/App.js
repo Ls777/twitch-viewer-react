@@ -19,6 +19,7 @@ class App extends Component {
         "esl_sc2",
         "dan", 
         "ls777", 
+        "sodapoppin",
         "wertytreuytrerty"
       ],
       error: null
@@ -137,15 +138,27 @@ class Channel extends Component {
   render() {
     const {displayName, result, onDismiss, isLoading, error} = this.state;
 
-   
+
     
     return (
       <li>
         <ProfPic result={result}/>
-        <div className="list-content">{displayName} - HI WHASSUP {isLoading.toString()} {error}
-
+        <div className="list-content">
+          <div className="list-bio">
+            <h2>{displayName}</h2>
+            <p>{result && result.bio}</p>
+          </div>
+          <div className={result && result.stream ? "list-status online" : "list-status offline"}>
+            <h2>{result && result.stream ? "ONLINE" : "OFFLINE"}</h2>
+            <p>{result && result.stream && result.stream.game}</p>
+            {result && result.stream && result.stream.preview.medium &&
+            <div>
+              <img src={result.stream.preview.medium} className="preview"/> 
+            </div>
+            } 
+          </div>
+          <button onClick={() => onDismiss(this.props.id)}></button>
         </div>
-        <button onClick={() => onDismiss(this.props.id)}>close</button>
       </li>
     )
   }
@@ -159,7 +172,7 @@ const ProfPic = ({result, isLoading}) =>
           <FontAwesomeIcon icon={faExclamationCircle} className="fa-3x"/>
         </div>
     : <div className="loadingIcon prof-pic">
-        <FontAwesomeIcon icon={faCircleNotch} className="fa-3x fa-spin"/>
+        <FontAwesomeIcon icon={faCircleNotch} className="fa-2x fa-spin"/>
       </div>
 
   

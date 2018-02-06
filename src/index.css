@@ -1,14 +1,22 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Yanone+Kaffeesatz');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
-h1, h2, h3 {
-  font-family: "Yanone Kaffeesatz", sans-serif;
-  margin-top: 5px;
+h1 {
+  font-family: "Roboto", sans-serif;
+  margin-top: 0px;
+  color: #FFF
 }
 
 body {
-  background-color: #19171c;
-  color: white;
+  background-color: #FAf9FA;
+  color: #575757;
   min-width: 400px;
   font-family: sans-serif;
 }
 
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
