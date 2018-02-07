@@ -14,22 +14,34 @@ html {
   }
 }
 
-.header {
+.header-container {
   background-color: #4b367c;
+  display: flex;
+  justify-content: center;
+  height: 7em;
+  align-items: center;
+  color:
+}
+
+.header {
+  flex-basis: 78em;
+  padding: 0 2em;
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  align-items: center;
-  height: 5em
+  align-items: flex-end;
+  height: 5em;
+  color: white;
 }
 
 .header-icon {
-  margin: 1em;
+  margin-right: 2em;
 }
 
 
-h1, h2, h3 {
-  font-family: "Roboto", sans-serif,Arial,sans-serif;
+h1 {
+  font-size: 3rem;
+  margin: 0px;
 }
 
 h2 {
@@ -48,6 +60,16 @@ p {
   width: 100%;
 }
 
+.small {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 65em) {
+  .small {
+    font-size: 1.3rem;;
+  }
+}
+
 
 form {
   margin-left:auto;
@@ -55,22 +77,36 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
-form input {
-  background: none;
-  border: solid 2px white;
-  color: white;
+.hide-offline {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 1.8rem;
+  color: #DDD
+}
+
+#checkbox {
+  margin: 0 1em;
+  border: solid 0px white;
+  background-color: transparent;
+}
+
+#textbox {
+  background-color: #866DBF;
+  border: solid 0px white;
+  border-radius: 5rem;
+  width: 20rem;
 }
 
 form button{
-  border: solid 2px white;
-  height: 30px;
-  background-color: white;
-  width: 30px;
-  font-size: 20px;
-  color: #4b367c;
+  border: solid 0px white;
+  height: 3rem;
+  background-color: Transparent;
+  width: 3rem;
+  font-size: 1.5rem;
+  color: #f5f5f5;
   padding-left: 4px;
 }
 
@@ -95,7 +131,7 @@ ul{
   flex-direction: column;
   align-items: stretch;
   list-style: none;
-  padding: 0px;
+  padding: 0 2rem;
   margin: auto;
   max-width: 70em;
 }
@@ -143,7 +179,7 @@ li {
 
 .list-bio, .list-status {
   position: relative;
-  padding: 1.25rem 2em;
+  padding: 1rem 2em;
 }
 
 .list-bio {

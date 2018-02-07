@@ -19,9 +19,10 @@ class App extends Component {
         "esl_sc2",
         "dan", 
         "ls777", 
-        "sodapoppin",
+        "BeyondTheSummit",
         "wertytreuytrerty"
       ],
+      viewOffline: true,
       error: null
     }
 
@@ -58,22 +59,24 @@ class App extends Component {
 }
 
 const Header = () =>
-  <div className="header">
-    <div className="header-icon">
-      <FontAwesomeIcon icon={faTwitch} className="fa-5x"/>
+  <div className="header-container">
+    <div className="header">
+      <div className="header-icon">
+        <FontAwesomeIcon icon={faTwitch} className="fa-5x"/>
+      </div>
+      <h1>Twitch Streams</h1>
+      <form>
+        <div className="hide-offline"><span>Hide offline streams</span>
+          <input id="checkbox" type="checkbox" name="offline"></input>
+        </div>
+        <div>
+          <input id="textbox" placeholder="Add new streamer"></input>
+          <button type="submit">
+            <FontAwesomeIcon icon={faSearch}/>
+          </button>
+        </div>
+      </form>
     </div>
-    <h1>Twitch Streams</h1>
-    <form>
-      <div>Hide offline streams
-        <input id="checkbox" type="checkbox" name="offline"></input>
-      </div>
-      <div>
-        <input id="textbox" placeholder="Add new streamer"></input>
-        <button type="submit">
-          <FontAwesomeIcon icon={faSearch}/>
-        </button>
-      </div>
-    </form>
   </div>
 
 
@@ -146,7 +149,7 @@ class Channel extends Component {
         <div className="list-content">
           <div className="list-bio">
             <h2>{displayName}</h2>
-            <p>{result && result.bio}</p>
+            <p className={result && result.bio && result.bio.length > 150 && "small"}>{result && result.bio}</p>
           </div>
           <div className={result && result.stream ? "list-status online" : "list-status offline"}>
             <h2>{result && result.stream ? "ONLINE" : "OFFLINE"}</h2>
