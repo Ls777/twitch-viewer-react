@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import { faCircleNotch, faExclamationCircle, faSearch } from '@fortawesome/fontawesome-free-solid'
+import { faCircleNotch, faExclamationCircle, faSearchPlus } from '@fortawesome/fontawesome-free-solid'
 import { faTwitch } from '@fortawesome/fontawesome-free-brands'
 import './App.css';
 
@@ -70,9 +70,9 @@ const Header = () =>
           <input id="checkbox" type="checkbox" name="offline"></input>
         </div>
         <div>
-          <input id="textbox" placeholder="Add new streamer"></input>
+          <input id="textbox"></input>
           <button type="submit">
-            <FontAwesomeIcon icon={faSearch}/>
+            <FontAwesomeIcon icon={faSearchPlus}/>
           </button>
         </div>
       </form>
