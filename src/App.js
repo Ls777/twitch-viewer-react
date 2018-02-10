@@ -148,7 +148,7 @@ class Channel extends Component {
         <ProfPic result={result}/>
         <div className="list-content">
           <div className="list-bio">
-            <h2>{displayName}</h2>
+            <h2><a href={result && result.logo && `https://www.twitch.tv/${this.props.id}`}>{displayName}</a></h2>
             <p className={result && result.bio && result.bio.length > 150 && "small"}>{result && result.bio}</p>
           </div>
           <div className={result && result.stream ? "list-status online" : "list-status offline"}>
