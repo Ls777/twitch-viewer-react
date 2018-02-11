@@ -3,6 +3,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faCircleNotch, faExclamationCircle, faSearchPlus } from '@fortawesome/fontawesome-free-solid'
 import { faTwitch } from '@fortawesome/fontawesome-free-brands'
 import './App.css';
+import serialize from 'form-serialize'
 
 
 const CLIENT_ID = "9uygzutqoo30vb6730vcjwr9sryai3";
@@ -28,6 +29,7 @@ class App extends Component {
 
     this.getArrayPos = this.getArrayPos.bind(this)
     this.onDismiss = this.onDismiss.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   onDismiss(id) {
@@ -39,6 +41,16 @@ class App extends Component {
   getArrayPos(id) {
     return this.state.channels.indexOf(id)
   }
+
+  onSubmit(event) {
+      
+      event.preventDefault();
+      const form = event.currentTarget
+      const body = serialize(form, {hash: true, empty: true})
+      const {channels} = this.state;
+      if (!channels.includes(body.name) && body.name != "") {channels.push(body.name)};
+      this.setState({channels})
+  }
   
 
   render() {
@@ -48,7 +60,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header />
+        <Header onSubmit={this.onSubmit}/>
         <Table 
           channels={channels}
           onDismiss={this.onDismiss}
@@ -58,19 +70,19 @@ class App extends Component {
   }
 }
 
-const Header = () =>
+const Header = ({onSubmit}) =>
   <div className="header-container">
     <div className="header">
       <div className="header-icon">
         <FontAwesomeIcon icon={faTwitch} className="fa-5x"/>
       </div>
       <h1>Twitch Streams</h1>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="hide-offline"><span>Hide offline streams</span>
           <input id="checkbox" type="checkbox" name="offline"></input>
         </div>
         <div>
-          <input id="textbox"></input>
+          <input id="textbox" name="name" type="text"></input>
           <button type="submit">
             <FontAwesomeIcon icon={faSearchPlus}/>
           </button>

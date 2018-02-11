@@ -20,7 +20,9 @@ html {
   justify-content: center;
   height: 8em;
   align-items: center;
-  color:
+  width: 100%;
+  position: fixed;
+  z-index: 10;
 }
 
 .header {
@@ -148,7 +150,7 @@ ul{
   flex-direction: column;
   align-items: stretch;
   list-style: none;
-  padding: 0 2rem;
+  padding: 10rem 2rem 2rem;
   margin: auto;
   max-width: 70em;
 }
