@@ -23,13 +23,14 @@ class App extends Component {
         "beyondTheSummit",
        // "wertytreuytrerty"
       ],
-      viewOffline: true,
+      hideOffline: false,
       error: null
     }
 
     this.getArrayPos = this.getArrayPos.bind(this)
     this.onDismiss = this.onDismiss.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   onDismiss(id) {
@@ -42,8 +43,14 @@ class App extends Component {
     return this.state.channels.indexOf(id)
   }
 
+  handleChange(e) {
+
+    this.setState({[e.target.name]: e.target.checked});
+    console.log(e.target.checked + " value")
+  }
+
   onSubmit(event) {
-      
+
       event.preventDefault();
       const form = event.currentTarget
       const body = serialize(form, {hash: true, empty: true})
@@ -55,14 +62,18 @@ class App extends Component {
 
   render() {
     const {
-      channels
+      channels,
+      hideOffline
     } = this.state;
 
     return (
       <div className="App">
-        <Header onSubmit={this.onSubmit}/>
+        <Header 
+          onSubmit={this.onSubmit}
+          handleChange={this.handleChange}/>
         <Table 
           channels={channels}
+          hideOffline={hideOffline}
           onDismiss={this.onDismiss}
         />
       </div>
@@ -70,7 +81,7 @@ class App extends Component {
   }
 }
 
-const Header = ({onSubmit}) =>
+const Header = ({onSubmit, handleChange}) =>
   <div className="header-container">
     <div className="header">
       <div className="header-icon">
@@ -79,7 +90,7 @@ const Header = ({onSubmit}) =>
       <h1>Twitch Streams</h1>
       <form onSubmit={onSubmit}>
         <div className="hide-offline"><span>Hide offline streams</span>
-          <input id="checkbox" type="checkbox" name="offline"></input>
+          <input id="checkbox" type="checkbox" name="hideOffline" onChange={handleChange}></input>
         </div>
         <div>
           <input id="textbox" name="name" type="text"></input>
@@ -93,13 +104,14 @@ const Header = ({onSubmit}) =>
 
 
 
-const Table = ({channels, onDismiss}) =>
+const Table = ({channels, onDismiss, hideOffline}) =>
   <ul>
     {channels.map((item) => 
       <Channel 
         key={item}
         id={item}
-        onDismiss={onDismiss}>
+        onDismiss={onDismiss}
+        hideOffline={hideOffline}>
       </Channel>
     )}
   </ul>
@@ -150,9 +162,14 @@ class Channel extends Component {
 	}
 
   render() {
-    const {displayName, result, onDismiss, isLoading, error} = this.state;
+    const {displayName, result, onDismiss, isLoading, error, hideOffline} = this.state;
+    console.log(this.props.hideOffline)
+    
 
     const online = result && result.stream ? true : false;
+    if (this.props.hideOffline && !isLoading && !online) {return null}
+
+
     const cardText = online 
       ? result.stream.channel.status 
       : isLoading 
@@ -168,7 +185,7 @@ class Channel extends Component {
         <div className="list-content">
           <div className="list-bio">
             <h2><a href={result && result.logo && `https://www.twitch.tv/${this.props.id}`}>{displayName}</a></h2>
-            <p className={cardText.length > 150 && "card-small"}>{cardText}</p>
+            <p className={cardText.length > 150 ? "card-small" : undefined}>{cardText}</p>
           </div>
           <div className={online ? "list-status online" : "list-status offline"}>
             <h2>{online ? "ONLINE" : "OFFLINE"}</h2>
