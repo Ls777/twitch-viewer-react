@@ -65,18 +65,18 @@ a:hover {
 }
 
 p {
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   margin: 0px;
   color: #737373;
   width: 100%;
 }
 
-.small {
+.card-small {
   font-size: 1rem;
 }
 
 @media screen and (max-width: 65em) {
-  .small {
+  .card-small {
     font-size: 1.3rem;;
   }
 }

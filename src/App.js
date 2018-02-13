@@ -20,8 +20,8 @@ class App extends Component {
         "esl_sc2",
         "dan", 
         "ls777", 
-        "BeyondTheSummit",
-        "wertytreuytrerty"
+        "beyondTheSummit",
+       // "wertytreuytrerty"
       ],
       viewOffline: true,
       error: null
@@ -48,7 +48,7 @@ class App extends Component {
       const form = event.currentTarget
       const body = serialize(form, {hash: true, empty: true})
       const {channels} = this.state;
-      if (!channels.includes(body.name) && body.name != "") {channels.push(body.name)};
+      if (!channels.includes(body.name.toLowerCase()) && body.name != "") {channels.push(body.name.toLowerCase())};
       this.setState({channels})
   }
   
@@ -143,7 +143,6 @@ class Channel extends Component {
       isLoading : false,
       error: results[1].error
     })
-    console.log({...results[0], ...results[1]});
   }
 
   componentDidMount() {
@@ -153,6 +152,14 @@ class Channel extends Component {
   render() {
     const {displayName, result, onDismiss, isLoading, error} = this.state;
 
+    const online = result && result.stream ? true : false;
+    const cardText = online 
+      ? result.stream.channel.status 
+      : isLoading 
+      ? "loading..."
+      : result.error
+      ? "User does not exist!"
+      : result.bio || ""
 
     
     return (
@@ -161,12 +168,13 @@ class Channel extends Component {
         <div className="list-content">
           <div className="list-bio">
             <h2><a href={result && result.logo && `https://www.twitch.tv/${this.props.id}`}>{displayName}</a></h2>
-            <p className={result && result.bio && result.bio.length > 150 && "small"}>{result && result.bio}</p>
+            <p className={cardText.length > 150 && "card-small"}>{cardText}</p>
           </div>
-          <div className={result && result.stream ? "list-status online" : "list-status offline"}>
-            <h2>{result && result.stream ? "ONLINE" : "OFFLINE"}</h2>
-            <p>{result && result.stream && result.stream.game}</p>
-            {result && result.stream && result.stream.preview.medium &&
+          <div className={online ? "list-status online" : "list-status offline"}>
+            <h2>{online ? "ONLINE" : "OFFLINE"}</h2>
+            {online && <p>{result.stream.game}</p>}
+            {online && <p><em>{result.stream.viewers + " viewers"}</em></p>}
+            {online && result.stream.preview.medium &&
             <div>
               <img src={result.stream.preview.medium} className="preview"/> 
             </div>
