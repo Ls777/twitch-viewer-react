@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { animated } from 'react-spring'
 import ProfPic from './ProfPic.js'
 
 const CLIENT_ID = "9uygzutqoo30vb6730vcjwr9sryai3";
@@ -51,7 +52,6 @@ class Channel extends Component {
   
     render() {
       const {displayName, result, onDismiss, isLoading} = this.state;
-      console.log(this.props.hideOffline)
       
   
       const online = result && result.stream ? true : false;
@@ -68,7 +68,7 @@ class Channel extends Component {
   
       
       return (
-        <li>
+        <animated.li style={this.props.style}>
           <ProfPic result={result}/>
           <div className="list-content">
             <div className="list-bio">
@@ -91,7 +91,7 @@ class Channel extends Component {
             </div>
             <button onClick={() => onDismiss(this.props.id)}></button>
           </div>
-        </li>
+        </animated.li>
       )
     }
   }

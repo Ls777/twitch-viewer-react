@@ -10,7 +10,8 @@
     "form-serialize": "^0.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0"
+    "react-scripts": "1.1.0",
+    "react-spring": "^4.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
