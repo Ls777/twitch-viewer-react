@@ -73,7 +73,7 @@ class Channel extends Component {
           <div className="list-content">
             <div className="list-bio">
               <h2><a href={result && result.logo && `https://www.twitch.tv/${this.props.id}`}>{displayName}</a></h2>
-              <p className={cardText.length > 150 ? "card-small" : undefined}>{cardText}</p>
+              <p className={cardText.length > 85 ? "card-small" : undefined}>{cardText}</p>
             </div>
             <div className={online ? "list-status online" : "list-status offline"}>
               <h2>{online ? "ONLINE" : "OFFLINE"}</h2>

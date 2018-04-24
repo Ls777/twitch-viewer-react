@@ -8,9 +8,9 @@ const Table = ({channels, onDismiss, hideOffline}) =>
     <Transition
         native
         keys={channels}
-        from={{ transform: 'translate(110%)', height: 150}}
-        enter={{ transform: 'translate(0px)' , height: 150}}
-        leave={{ transform: 'translate(100%)', height: 0, margin: 0, border: 0}}
+        from={{ transform: 'translate(110%)', opacity: 1,  marginBottom: "0em"}}
+        enter={{ transform: 'translate(0%)' , opacity: 1,  marginBottom: "0em"}}
+        leave={{ transform: 'translate(110%)',  opacity: 0,  marginBottom: "-10.375rem;" }}
     >
 
     {channels.map(item => styles =>

@@ -1,5 +1,6 @@
 html {
   font-size: 8px;
+  overflow-x: hidden;
 }
 
 @media screen and (min-width: 40em) {
@@ -10,9 +11,11 @@ html {
 
 @media screen and (min-width: 65em) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
+
+
 
 .header-container {
   background-color: #4b367c;
@@ -159,6 +162,7 @@ ul{
   padding: 10rem 2rem 2rem;
   margin: auto;
   max-width: 70em;
+  overflow-x: visible;
 }
 
 li {
@@ -173,6 +177,7 @@ li {
   box-sizing: border-box;
   box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  will-change: transform, opacity, margin-bottom; 
 }
 
 .prof-pic{
@@ -234,7 +239,7 @@ li {
 }
 
 .offline {
-  background-color: #F0F0F0;
+  background-color: #E0E0E0;
 }
 
 .online:hover{

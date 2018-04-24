@@ -14,13 +14,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      channels: [
-        "esl_sc2",
-        "dan", 
-        "ls777", 
-        "beyondTheSummit",
-       // "wertytreuytrerty"
-      ],
+      channels: [],
       hideOffline: false,
       error: null
     }
@@ -29,7 +23,17 @@ class App extends Component {
     this.onDismiss = this.onDismiss.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.addChannel = this.addChannel.bind(this)
   }
+
+  componentDidMount() {
+    //setTimeout( () => this.addChannel('esl_sc2'), 5000)
+    /*setTimeout( () => this.addChannel("dan"), 400)
+    setTimeout( () => this.addChannel("ls777"), 600)
+    setTimeout( () => this.addChannel("beyondTheSummit"), 800)*/
+  }
+
+
 
   onDismiss(id) {
     console.log(id);
@@ -51,9 +55,13 @@ class App extends Component {
       event.preventDefault();
       const form = event.currentTarget
       const body = serialize(form, {hash: true, empty: true})
-      const {channels} = this.state;
-      if (!channels.includes(body.name.toLowerCase()) && body.name !== "") {channels.push(body.name.toLowerCase())};
-      this.setState({channels})
+      this.addChannel(body.name)
+  }
+
+  addChannel(name) {
+    const {channels} = this.state;
+    if (!channels.includes(name.toLowerCase()) && name !== '') {channels.push(name.toLowerCase())};
+    this.setState({channels})
   }
   
 
