@@ -4,7 +4,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faSearchPlus } from '@fortawesome/fontawesome-free-solid'
 import { faTwitch } from '@fortawesome/fontawesome-free-brands'
 
-const Header = ({onSubmit, handleChange}) =>
+const Header = ({onSubmit, onChange, onCheckbox, value}) =>
   <div className="header-container">
     <div className="header">
       <div className="header-icon">
@@ -13,10 +13,10 @@ const Header = ({onSubmit, handleChange}) =>
       <h1>Twitch Streams</h1>
       <form onSubmit={onSubmit}>
         <div className="hide-offline"><span>Hide offline streams</span>
-          <input id="checkbox" type="checkbox" name="hideOffline" onChange={handleChange}></input>
+          <input id="checkbox" type="checkbox" name="hideOffline" onChange={onCheckbox}></input>
         </div>
         <div>
-          <input id="textbox" name="name" type="text"></input>
+          <input id="textbox" name="name" type="text" value={value} onChange={onChange}></input>
           <button type="submit">
             <FontAwesomeIcon icon={faSearchPlus}/>
           </button>

@@ -4,7 +4,7 @@ import './App.css';
 
 import Header from './Header.js';
 import Table from './Table.js';
-import serialize from 'form-serialize'
+
 
 
 
@@ -14,26 +14,25 @@ class App extends Component {
     super(props);
 
     this.state = {
-      channels: [],
+      channels: ["esl_sc2"],
       hideOffline: false,
-      error: null
+      input: ""
     }
 
     this.getArrayPos = this.getArrayPos.bind(this)
     this.onDismiss = this.onDismiss.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.handleCheckbox = this.handleCheckbox.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.addChannel = this.addChannel.bind(this)
   }
 
   componentDidMount() {
-    //setTimeout( () => this.addChannel('esl_sc2'), 5000)
-    /*setTimeout( () => this.addChannel("dan"), 400)
-    setTimeout( () => this.addChannel("ls777"), 600)
-    setTimeout( () => this.addChannel("beyondTheSummit"), 800)*/
+    setTimeout( () => this.addChannel("esl_sc2"), 100)
+    setTimeout( () => this.addChannel("dan"), 200)
+    setTimeout( () => this.addChannel("ls777"), 400)
+    setTimeout( () => this.addChannel("beyondTheSummit"), 600)
   }
-
-
 
   onDismiss(id) {
     console.log(id);
@@ -45,17 +44,19 @@ class App extends Component {
     return this.state.channels.indexOf(id)
   }
 
-  handleChange(e) {
-
+  handleCheckbox(e) {
     this.setState({[e.target.name]: e.target.checked});
-    console.log(e.target.checked + " value")
   }
 
-  onSubmit(event) {
-      event.preventDefault();
-      const form = event.currentTarget
-      const body = serialize(form, {hash: true, empty: true})
-      this.addChannel(body.name)
+  handleChange(e) {
+    this.setState({input: e.target.value});
+    e.preventDefault();
+  }
+
+  handleSubmit(e) {
+    this.addChannel(this.state.input)
+    e.preventDefault();
+    console.log("where ya at buddy")
   }
 
   addChannel(name) {
@@ -68,14 +69,17 @@ class App extends Component {
   render() {
     const {
       channels,
-      hideOffline
+      hideOffline,
+      input
     } = this.state;
 
     return (
       <div className="App">
         <Header 
-          onSubmit={this.onSubmit}
-          handleChange={this.handleChange}/>
+          onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
+          onCheckbox={this.handleCheckbox}
+          value={input}/>
         <Table 
           channels={channels}
           hideOffline={hideOffline}
